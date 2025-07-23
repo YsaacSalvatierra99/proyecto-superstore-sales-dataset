@@ -37,6 +37,37 @@ WHERE
     [Product Name] IS NULL OR
     [Sales] IS NULL
 
+UPDATE dbo.DatosTrainRaw
+SET 
+  [Order ID]       = ISNULL([Order ID], 'Desconocido'),
+  [Ship Mode]      = ISNULL([Ship Mode], 'Desconocido'),
+  [Customer ID]    = ISNULL([Customer ID], 'Desconocido'),
+  [Customer Name]  = ISNULL([Customer Name], 'Desconocido'),
+  [Segment]        = ISNULL([Segment], 'Desconocido'),
+  [Country]        = ISNULL([Country], 'Desconocido'),
+  [City]           = ISNULL([City], 'Desconocido'),
+  [State]          = ISNULL([State], 'Desconocido'),
+  [Region]         = ISNULL([Region], 'Desconocido'),
+  [Product ID]     = ISNULL([Product ID], 'Desconocido'),
+  [Category]       = ISNULL([Category], 'Desconocido'),
+  [Sub-Category]   = ISNULL([Sub-Category], 'Desconocido'),
+  [Product Name]   = ISNULL([Product Name], 'Desconocido')
+WHERE 
+  [Order ID] IS NULL OR
+  [Ship Mode] IS NULL OR
+  [Customer ID] IS NULL OR
+  [Customer Name] IS NULL OR
+  [Segment] IS NULL OR
+  [Country] IS NULL OR
+  [City] IS NULL OR
+  [State] IS NULL OR
+  [Region] IS NULL OR
+  [Product ID] IS NULL OR
+  [Category] IS NULL OR
+  [Sub-Category] IS NULL OR
+  [Product Name] IS NULL;
+
+
 -- 4. Eliminar filas duplicadas (si aplica)
 WITH FilasDuplicadas AS (
     SELECT *,
@@ -49,10 +80,37 @@ WITH FilasDuplicadas AS (
 DELETE FROM CTE_Duplicados
 WHERE fila > 1;
 
--- 5. Crear nuevas columnas derivadas (ejemplo: año de orden)
--- SELECT [Order Date], YEAR([Order Date]) AS AñoOrden FROM train;
--- ALTER TABLE train ADD AñoOrden INT;
--- UPDATE train SET AñoOrden = YEAR([Order Date]);
+--5. Crear columna Año y asignarle el año de la fecha de orden
+ALTER TABLE dbo.DatosTrainRaw
+ADD AñoOrden INT;
 
--- 6. Validar ventas negativas
--- SELECT * FROM train WHERE Sales < 0;
+UPDATE dbo.DatosTrainRaw
+SET Año = YEAR([Order Date])
+WHERE [Order Date] IS NOT NULL;
+
+-- 5.2 Crear columna Mes
+ALTER TABLE dbo.DatosTrainRaw ADD MesOrden INT;
+
+UPDATE dbo.DatosTrainRaw
+SET MesOrden = MONTH([Order Date]);
+
+-- 5.3 Modificar columnas de City y Country en mayuscula para que sea más legible y evitar inconsistencias 
+UPDATE dbo.DatosTrainRaw
+SET City = UPPER(City),
+    Country = UPPER(Country);
+
+-- 6.1 Normalizar los precios ya que estaban mal puestos debido a un error en la importacion por la nominacion regional en el uso de "," y "."
+
+SELECT [Row ID], [PRODUCT Name], [SALES]
+FROM DatosTrainRaw;
+
+SELECT TOP 20 Sales, Sales / 1000.0 AS Corregido
+FROM dbo.DatosTrainRaw
+ORDER BY Sales DESC;
+
+UPDATE dbo.DatosTrainRaw
+SET Sales = Sales / 1000.0
+WHERE Sales > 1000000;  -- Esto es para que no afecte a los valores que no eran tan altos por lo tanto no tenian este error
+
+
+
