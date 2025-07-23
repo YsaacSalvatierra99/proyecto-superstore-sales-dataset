@@ -45,8 +45,11 @@ WITH (
     Habilidades aplicadas: SELECT, UPDATE, CAST, CONVERT, ISNULL, CASE, GROUP BY
 Procedimiento:
 1) Hacemos una consulta tipo visual para conocer la columna
+
 2) Hacemos otra consulta tipo visual de qué sucedería si pedimos los datos con la/s modificación/es para normalizarla, y ver si aparecería algun error.
+
 3) Editamos los datos con consultas visuales para verificar los datos que no coinciden con los demás.
+
 4) Una vez sepamos las modificaciones necesarias para que coincidan los datos, utilizamos los comandos de ALTER TABLE, UPDATE (entre otros) para que este cambio afecte de manera permanente en la tabla.
 */
 
