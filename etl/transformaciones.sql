@@ -82,8 +82,13 @@ WITH FilasDuplicadas AS (
            ) AS fila
     FROM dbo.DatosTrainRaw
 )
-DELETE FROM CTE_Duplicados
-WHERE fila > 1;
+DELETE FROM dbo.DatosTrainRaw
+WHERE [Row ID] IN (
+    SELECT [Row ID]
+    FROM FilasDuplicadas
+    WHERE fila > 1
+);
+
 
 --5. Crear columna Año y asignarle el año de la fecha de orden
 ALTER TABLE dbo.DatosTrainRaw
