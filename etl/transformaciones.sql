@@ -19,7 +19,7 @@ UPDATE dbo.DatosTrainRaw
  SET [Order Date] = CAST([Order Date] AS DATE),
      [Ship Date] = CAST([Ship Date] AS DATE);
 
--- 3. Reemplazar valores nulos en columnas clave (Sé que hay maneras de hacerla con scripts, pero me falta estudiarlo para saber hacerlo mejor)
+-- 3. Te muestra las filas que llevan NULL en alguna de sus columnas (Solo para visualizarlas, ya que eliminarlo será dependiendo del analisis de datos)
 SELECT *
 FROM dbo.DatosTrainRaw
 WHERE 
