@@ -54,7 +54,7 @@ Procedimiento:
 */
 
 -- 1. Vista general del dataset
-SELECT * FROM train;
+SELECT * FROM dbo.DatosTrainRaw;
 
 -- 2. Estandarizar formato de fecha (si fuera necesario)
 SELECT [Order Date], [Ship Date]
@@ -110,8 +110,9 @@ ALTER TABLE dbo.DatosTrainRaw
 ADD AñoOrden INT;
 
 UPDATE dbo.DatosTrainRaw
-SET Año = YEAR([Order Date])
+SET AñoOrden = YEAR([Order Date])
 WHERE [Order Date] IS NOT NULL;
+
 
 -- 5.2 Crear columna Mes
 ALTER TABLE dbo.DatosTrainRaw ADD MesOrden INT;
