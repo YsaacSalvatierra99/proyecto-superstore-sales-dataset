@@ -16,6 +16,35 @@ El proyecto se actualizará de forma constante a medida que encuentre nuevas for
 - `proyecto.pbix`: Archivo de Power BI con todo el modelo.
 
 ---
+## 📁 Columnas de la tabla
+- Row ID  
+- Order ID  
+- Order Date  
+- Ship Date  
+- Ship Mode  
+- Customer ID  
+- Customer Name  
+- Segment  
+- Country  
+- City  
+- State  
+- Postal Code  
+- Region  
+- Product ID  
+- Category  
+- Sub-Category  
+- Product Name  
+- Sales
+- Año
+- Mes 
+
+---
+## 📊 Tabla de tipos de datos 
+
+![Tabla de tipos de datos](dataset/tabla-de-tipos-datos)
+
+
+---
 
 ## 🛠️ Herramientas utilizadas
 
