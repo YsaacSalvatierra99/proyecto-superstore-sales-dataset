@@ -87,36 +87,6 @@ WHERE
     [Product Name] IS NULL OR
     [Sales] IS NULL
 
-UPDATE dbo.DatosTrainRaw
-SET 
-  [Order ID]       = ISNULL([Order ID], 'Desconocido'),
-  [Ship Mode]      = ISNULL([Ship Mode], 'Desconocido'),
-  [Customer ID]    = ISNULL([Customer ID], 'Desconocido'),
-  [Customer Name]  = ISNULL([Customer Name], 'Desconocido'),
-  [Segment]        = ISNULL([Segment], 'Desconocido'),
-  [Country]        = ISNULL([Country], 'Desconocido'),
-  [City]           = ISNULL([City], 'Desconocido'),
-  [State]          = ISNULL([State], 'Desconocido'),
-  [Region]         = ISNULL([Region], 'Desconocido'),
-  [Product ID]     = ISNULL([Product ID], 'Desconocido'),
-  [Category]       = ISNULL([Category], 'Desconocido'),
-  [Sub-Category]   = ISNULL([Sub-Category], 'Desconocido'),
-  [Product Name]   = ISNULL([Product Name], 'Desconocido')
-WHERE 
-  [Order ID] IS NULL OR
-  [Ship Mode] IS NULL OR
-  [Customer ID] IS NULL OR
-  [Customer Name] IS NULL OR
-  [Segment] IS NULL OR
-  [Country] IS NULL OR
-  [City] IS NULL OR
-  [State] IS NULL OR
-  [Region] IS NULL OR
-  [Product ID] IS NULL OR
-  [Category] IS NULL OR
-  [Sub-Category] IS NULL OR
-  [Product Name] IS NULL;
-
 
 -- 4. Eliminar filas duplicadas (si aplica)
 WITH FilasDuplicadas AS (
