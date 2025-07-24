@@ -123,7 +123,8 @@ SET MesOrden = MONTH([Order Date]);
 -- 5.3 Modificar columnas de City y Country en mayuscula para que sea más legible y evitar inconsistencias 
 UPDATE dbo.DatosTrainRaw
 SET City = UPPER(City),
-    Country = UPPER(Country);
+    Country = UPPER(Country),
+    State = UPPER(State);
 
 -- 6.1 Normalizar los precios ya que estaban mal puestos debido a un error en la importacion por la nominacion regional en el uso de "," y "."
 
