@@ -139,5 +139,39 @@ UPDATE dbo.DatosTrainRaw
 SET Sales = Sales / 1000.0
 WHERE Sales > 1000000;  -- Esto es para que no afecte a los valores que no eran tan altos por lo tanto no tenian este error
 
+--.7 Limpiar los espacios al principio, dentro y al final de las cadenas. Esto para que no hayan dobles espacios, solo 1.
+--Entiendo que esta opcion puede no ser eficiente para mas de 2 espacios, para eso pensaba usar WHILE pero no se bien como aplicarlo, hasta entonces me quedare con esta version de una solucion.
+UPDATE DatosTrainRaw
+SET
+    [Order ID]       = LTRIM(RTRIM(REPLACE([Order ID], '  ', ' '))),
+    [Ship Mode]      = LTRIM(RTRIM(REPLACE([Ship Mode], '  ', ' '))),
+    [Customer ID]    = LTRIM(RTRIM(REPLACE([Customer ID], '  ', ' '))),
+    [Customer Name]  = LTRIM(RTRIM(REPLACE([Customer Name], '  ', ' '))),
+    Segment          = LTRIM(RTRIM(REPLACE(Segment, '  ', ' '))),
+    Country          = LTRIM(RTRIM(REPLACE(Country, '  ', ' '))),
+    City             = LTRIM(RTRIM(REPLACE(City, '  ', ' '))),
+    State            = LTRIM(RTRIM(REPLACE(State, '  ', ' '))),
+    Region           = LTRIM(RTRIM(REPLACE(Region, '  ', ' '))),
+    [Product ID]     = LTRIM(RTRIM(REPLACE([Product ID], '  ', ' '))),
+    Category         = LTRIM(RTRIM(REPLACE(Category, '  ', ' '))),
+    [Sub-Category]   = LTRIM(RTRIM(REPLACE([Sub-Category], '  ', ' '))),
+    [Product Name]   = LTRIM(RTRIM(REPLACE([Product Name], '  ', ' ')));
+
+--8. Cambiar datos tipo NULL de la columna [Postal Code] a 9999. 
+-- Usaré esta convencion para identificar los NULL aun manteniendome en el tipo de dato INT.
+
+UPDATE DatosTrainRaw
+SET [Postal Code] = 99999
+WHERE [Postal Code] IS NULL;
+
+--9. Verificar que no haya campos numeros invalidos en columnas tipo INT 
+SELECT *
+FROM DatosTrainRaw
+WHERE Sales < 0;
+
+--10. Verificar que los valores de la columna [Order Date] es menor que [Ship Date]
+SELECT *
+FROM DatosTrainRaw
+WHERE [Ship Date] < [Order Date];
 
 
