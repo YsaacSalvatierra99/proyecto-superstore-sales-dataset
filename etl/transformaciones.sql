@@ -197,35 +197,34 @@ ALTER TABLE DatosTrainRaw
 ADD MesTexto VARCHAR(20);
 
 UPDATE DatosTrainRaw
-SET MesTexto = CASE Mes
-    WHEN 1 THEN 'Enero'
-    WHEN 2 THEN 'Febrero'
-    WHEN 3 THEN 'Marzo'
-    WHEN 4 THEN 'Abril'
-    WHEN 5 THEN 'Mayo'
-    WHEN 6 THEN 'Junio'
-    WHEN 7 THEN 'Julio'
-    WHEN 8 THEN 'Agosto'
-    WHEN 9 THEN 'Septiembre'
-    WHEN 10 THEN 'Octubre'
-    WHEN 11 THEN 'Noviembre'
-    WHEN 12 THEN 'Diciembre'
-    ELSE 'Desconocido'
+SET MonthName = CASE Mes
+    WHEN 1 THEN 'January'
+    WHEN 2 THEN 'February'
+    WHEN 3 THEN 'March'
+    WHEN 4 THEN 'April'
+    WHEN 5 THEN 'May'
+    WHEN 6 THEN 'June'
+    WHEN 7 THEN 'July'
+    WHEN 8 THEN 'August'
+    WHEN 9 THEN 'September'
+    WHEN 10 THEN 'October'
+    WHEN 11 THEN 'November'
+    WHEN 12 THEN 'December'
+    ELSE 'Unknown'
 END;
 
 --12. Convertir la columna [Order Date] en texto y pasarlo a DiaTexto.
 
 UPDATE DatosTrainRaw
-SET DiaTexto = CASE DATEPART(WEEKDAY, [Order Date])
-    WHEN 1 THEN 'Domingo'
-    WHEN 2 THEN 'Lunes'
-    WHEN 3 THEN 'Martes'
-    WHEN 4 THEN 'Miércoles'
-    WHEN 5 THEN 'Jueves'
-    WHEN 6 THEN 'Viernes'
-    WHEN 7 THEN 'Sábado'
+SET OrderDayText = CASE DATEPART(WEEKDAY, [Order Date])
+    WHEN 1 THEN 'Sunday'
+    WHEN 2 THEN 'Monday'
+    WHEN 3 THEN 'Tuesday'
+    WHEN 4 THEN 'Wednesday'
+    WHEN 5 THEN 'Thursday'
+    WHEN 6 THEN 'Friday'
+    WHEN 7 THEN 'Saturday'
 END;
-
 --13. Crear una columna de trimestre (Q1, Q2, etc.).
 
 ALTER TABLE DatosTrainRaw
