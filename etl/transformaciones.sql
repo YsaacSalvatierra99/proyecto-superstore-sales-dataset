@@ -174,4 +174,94 @@ SELECT *
 FROM DatosTrainRaw
 WHERE [Ship Date] < [Order Date];
 
+--11. Convertir la columna Mes en texto y pasarla a la columna MesTexto.
+SELECT Mes,
+       CASE Mes
+           WHEN 1 THEN 'Enero'
+           WHEN 2 THEN 'Febrero'
+           WHEN 3 THEN 'Marzo'
+           WHEN 4 THEN 'Abril'
+           WHEN 5 THEN 'Mayo'
+           WHEN 6 THEN 'Junio'
+           WHEN 7 THEN 'Julio'
+           WHEN 8 THEN 'Agosto'
+           WHEN 9 THEN 'Septiembre'
+           WHEN 10 THEN 'Octubre'
+           WHEN 11 THEN 'Noviembre'
+           WHEN 12 THEN 'Diciembre'
+           ELSE 'Desconocido'
+       END AS NombreMes
+FROM DatosTrainRaw;
+
+ALTER TABLE DatosTrainRaw
+ADD MesTexto VARCHAR(20);
+
+UPDATE DatosTrainRaw
+SET MesTexto = CASE Mes
+    WHEN 1 THEN 'Enero'
+    WHEN 2 THEN 'Febrero'
+    WHEN 3 THEN 'Marzo'
+    WHEN 4 THEN 'Abril'
+    WHEN 5 THEN 'Mayo'
+    WHEN 6 THEN 'Junio'
+    WHEN 7 THEN 'Julio'
+    WHEN 8 THEN 'Agosto'
+    WHEN 9 THEN 'Septiembre'
+    WHEN 10 THEN 'Octubre'
+    WHEN 11 THEN 'Noviembre'
+    WHEN 12 THEN 'Diciembre'
+    ELSE 'Desconocido'
+END;
+
+--12. Convertir la columna [Order Date] en texto y pasarlo a DiaTexto.
+
+UPDATE DatosTrainRaw
+SET DiaTexto = CASE DATEPART(WEEKDAY, [Order Date])
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+END;
+
+--13. Crear una columna de trimestre (Q1, Q2, etc.).
+
+ALTER TABLE DatosTrainRaw
+ADD Trimestre VARCHAR(5);
+
+UPDATE DatosTrainRaw
+SET Trimestre = 
+    CASE DATEPART(QUARTER, [Order Date])
+        WHEN 1 THEN 'Q1'
+        WHEN 2 THEN 'Q2'
+        WHEN 3 THEN 'Q3'
+        WHEN 4 THEN 'Q4'
+    END;
+
+--14. Convertir la columna [Ship Date] en texto y pasarlo a [DiaEntregaTexto].
+
+ALTER TABLE DatosTrainRaw
+ADD DiaEntregaTexto VARCHAR(20);
+
+
+UPDATE DatosTrainRaw
+SET DiaEntregaTexto = CASE DATEPART(WEEKDAY, [Ship Date])
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+END;
+
+--15. Crear una columna TiempoDeEntrega (cantidad de días entre Ship Date y Order Date).
+
+ALTER TABLE DatosTrainRaw
+ADD TiempoDeEntrega INT;
+
+UPDATE DatosTrainRaw
+SET TiempoDeEntrega = DATEDIFF(DAY, [Order Date], [Ship Date]);
 
