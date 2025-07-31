@@ -242,25 +242,26 @@ SET Trimestre =
 --14. Convertir la columna [Ship Date] en texto y pasarlo a [DiaEntregaTexto].
 
 ALTER TABLE DatosTrainRaw
-ADD DiaEntregaTexto VARCHAR(20);
+ADD DeliveryDayText VARCHAR(20);
 
 
 UPDATE DatosTrainRaw
-SET DiaEntregaTexto = CASE DATEPART(WEEKDAY, [Ship Date])
-    WHEN 1 THEN 'Domingo'
-    WHEN 2 THEN 'Lunes'
-    WHEN 3 THEN 'Martes'
-    WHEN 4 THEN 'Miércoles'
-    WHEN 5 THEN 'Jueves'
-    WHEN 6 THEN 'Viernes'
-    WHEN 7 THEN 'Sábado'
+SET DeliveryDayText = CASE DATEPART(WEEKDAY, [Ship Date])
+    WHEN 1 THEN 'Sunday'
+    WHEN 2 THEN 'Monday'
+    WHEN 3 THEN 'Tuesday'
+    WHEN 4 THEN 'Wednesday'
+    WHEN 5 THEN 'Thursday'
+    WHEN 6 THEN 'Friday'
+    WHEN 7 THEN 'Saturday'
 END;
+
 
 --15. Crear una columna TiempoDeEntrega (cantidad de días entre Ship Date y Order Date).
 
 ALTER TABLE DatosTrainRaw
-ADD TiempoDeEntrega INT;
+ADD DeliveryTime INT;
 
 UPDATE DatosTrainRaw
-SET TiempoDeEntrega = DATEDIFF(DAY, [Order Date], [Ship Date]);
+SET DeliveryTime = DATEDIFF(DAY, [Order Date], [Ship Date]);
 
