@@ -265,3 +265,12 @@ ADD DeliveryTime INT;
 UPDATE DatosTrainRaw
 SET DeliveryTime = DATEDIFF(DAY, [Order Date], [Ship Date]);
 
+--16. Crear una columna de YearMonth para tener el año y mes en formato texto(varchar).
+
+ALTER TABLE DatosTrainRaw
+ADD YearMonth VARCHAR(7);
+
+UPDATE DatosTrainRaw
+SET YearMonth = 
+    CAST([Year] AS VARCHAR(4)) + '-' + 
+    RIGHT('0' + CAST([Month] AS VARCHAR(2)), 2);
