@@ -111,15 +111,38 @@ ORDER BY AvgDeliveryDays DESC, TotalSales DESC;
 
 --2. ¿Qué tipo de cliente (Segment) compra más según trimestre/zona?
 
-
+SELECT
+Quarter,
+Region,
+Segment,
+COUNT(DISTINCT [Order ID]) AS PedidosUnicos,
+SUM(sales) AS MontoTotal
+FROM dbo.DatosTrainRaw
+GROUP BY Quarter, Region, Segment
+ORDER BY Quarter, Region, MontoTotal DESC;
 
 --3. Revisar la demora de entrega en cada caso para ver si tiene relacion
 
-
+SELECT
+    Segment,
+    Region,
+    AVG(deliveryTime) AS PromedioDemora,
+    COUNT(DISTINCT [Order ID])  AS PedidosUnicos,
+    SUM(sales)                  AS    MontoTotal
+FROM dbo.DatosTrainRaw
+GROUP BY Segment, Region
+ORDER BY PromedioDemora DESC, MontoTotal DESC;
 
 
 ALERTAS
 
---1. Ventas con DeliveryTime inusualmente alto (>15 días)
+--1. Ventas con DeliveryTime inusualmente alto
+
+SELECT 
+  [Order ID],Segment,Category,
+  DeliveryTime,Region, Quarter,Sales
+FROM dbo.DatosTrainRaw
+WHERE DeliveryTime >=7
+ORDER BY DeliveryTime DESC, Sales DESC;
 
 
