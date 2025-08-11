@@ -35,7 +35,7 @@ GROUP BY Semester, Region
 ORDER BY
 TotalSales DESC;
 
--- Sacar una conclusion de si hay alguna estacionalidad
+-- Sacar una conclusion de si hay alguna estacionalidad (FALTA)
 
 
 PRODUCTOS
@@ -145,4 +145,8 @@ FROM dbo.DatosTrainRaw
 WHERE DeliveryTime >=7
 ORDER BY DeliveryTime DESC, Sales DESC;
 
+-- Baja de ventas respecto al mes anterior (puede indicar problema puntual). (FALTA)
+-- Caída de un cliente top (FALTA)
 
+
+FALTAN MAS QUERIES COMPARATIVOS Y PREDICTIVOS.
