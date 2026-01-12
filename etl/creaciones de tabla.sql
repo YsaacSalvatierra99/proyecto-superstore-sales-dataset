@@ -6,7 +6,7 @@ Una vez abierto el Excel, fui a Datos/Texto en columnas/Delimitados/Coma.
 Ahora me faltaba crear una tabla e importar el data set a la tabla de SQL server.
 
 -- 2. Creacion de tabla tipo RAW(Elegi crear primero una tabla tipo RAW ya que el data set no era muy grande y tenia problemas en la importacion y no sabia si era por el formato de alguna columna o elementos que se me escapaban a entenderlo)
-Use Principal*/
+*/
 
 CREATE TABLE dbo.DatosTrainRaw (
     [Row ID] VARCHAR(MAX),
