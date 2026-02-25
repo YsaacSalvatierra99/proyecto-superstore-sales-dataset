@@ -75,3 +75,14 @@ CREATE TABLE Ventas (
     [Customer ID] VARCHAR(50),    
     [Product ID] VARCHAR(50), 
 );
+
+
+--. Creacion de tabla Geografia.
+
+CREATE TABLE Geografia(
+	Postal_Code VARCHAR(20) PRIMARY KEY,
+	City VARCHAR (100),
+	State VARCHAR(100),
+	Country VARCHAR (100),
+	Region VARCHAR (50)
+);
