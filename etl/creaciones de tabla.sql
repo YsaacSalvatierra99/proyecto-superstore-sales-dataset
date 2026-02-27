@@ -86,3 +86,13 @@ CREATE TABLE Geografia(
 	Country VARCHAR (100),
 	Region VARCHAR (50)
 );
+
+/*Crear la tabla si aún no la tienes. */
+CREATE TABLE Tiempo (
+    Order_Date DATE PRIMARY KEY,
+    Year INT,
+    Month INT,
+    Month_Name VARCHAR(20),
+    Quarter VARCHAR(2),
+    Semester VARCHAR(20)
+);
