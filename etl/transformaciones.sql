@@ -233,3 +233,40 @@ SET YearMonth =
     CAST([Year] AS VARCHAR(4)) + '-' + 
     RIGHT('0' + CAST([Month] AS VARCHAR(2)), 2);
 
+
+/* Estas consultas son para cambiar el nombre de las columnas a tipo snake_case. */
+-- Tabla Ventas
+EXEC sp_rename 'dbo.Ventas.[Order ID]', 'order_id', 'COLUMN';
+EXEC sp_rename 'dbo.Ventas.[Order Date]', 'order_date', 'COLUMN';
+EXEC sp_rename 'dbo.Ventas.[Ship Date]', 'ship_date', 'COLUMN';
+EXEC sp_rename 'dbo.Ventas.[Ship Mode]', 'ship_mode', 'COLUMN';
+EXEC sp_rename 'dbo.Ventas.[Postal Code]', 'postal_code', 'COLUMN';
+EXEC sp_rename 'dbo.Ventas.[Customer ID]', 'customer_id', 'COLUMN';
+EXEC sp_rename 'dbo.Ventas.[Product ID]', 'product_id', 'COLUMN';
+EXEC sp_rename 'dbo.Ventas.Sales', 'sales', 'COLUMN';
+
+-- Tabla Clientes
+EXEC sp_rename 'dbo.Clientes.CustomerID', 'customer_id', 'COLUMN';
+EXEC sp_rename 'dbo.Clientes.CustomerName', 'customer_name', 'COLUMN';
+EXEC sp_rename 'dbo.Clientes.Segment', 'segment', 'COLUMN';
+
+-- Tabla Productos
+EXEC sp_rename 'dbo.Productos.ProductID', 'product_id', 'COLUMN';
+EXEC sp_rename 'dbo.Productos.ProductName', 'product_name', 'COLUMN';
+EXEC sp_rename 'dbo.Productos.Category', 'category', 'COLUMN';
+EXEC sp_rename 'dbo.Productos.SubCategory', 'sub_category', 'COLUMN';
+
+-- Tabla Tiempo (Ya tenías algunos en snake_case, aquí los unificamos)
+EXEC sp_rename 'dbo.Tiempo.Order_Date', 'order_date', 'COLUMN';
+EXEC sp_rename 'dbo.Tiempo.Year', 'year_year', 'COLUMN'; -- 'year' es palabra reservada
+EXEC sp_rename 'dbo.Tiempo.Month', 'month_month', 'COLUMN';
+EXEC sp_rename 'dbo.Tiempo.Month_Name', 'month_name', 'COLUMN';
+EXEC sp_rename 'dbo.Tiempo.Quarter', 'quarter', 'COLUMN';
+EXEC sp_rename 'dbo.Tiempo.Semester', 'semester', 'COLUMN';
+
+-- Tabla Geografia
+EXEC sp_rename 'dbo.Geografia.Postal_Code', 'postal_code', 'COLUMN';
+EXEC sp_rename 'dbo.Geografia.City', 'city', 'COLUMN';
+EXEC sp_rename 'dbo.Geografia.State', 'state', 'COLUMN';
+EXEC sp_rename 'dbo.Geografia.Country', 'country', 'COLUMN';
+EXEC sp_rename 'dbo.Geografia.Region', 'region', 'COLUMN';
