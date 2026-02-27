@@ -1,23 +1,27 @@
 
 /* Relacion entre Ventas[Customer ID] y Clientes[CustomerID] */
-ALTER TABLE dbo.Ventas
-ADD CONSTRAINT FK_Ventas_Clientes
-FOREIGN KEY ([Customer ID]) REFERENCES dbo.Clientes(CustomerID);
+
+ALTER TABLE dbo.Ventas ADD CONSTRAINT fk_ventas_clientes 
+FOREIGN KEY (customer_id) REFERENCES dbo.Clientes(customer_id);
+
 
 /* Relacion entre Ventas[Product ID] y Productos[ProductID] */
-ALTER TABLE dbo.Ventas
-ADD CONSTRAINT FK_Ventas_Productos
-FOREIGN KEY ([Product ID]) REFERENCES dbo.Productos(ProductID);
+
+ALTER TABLE dbo.Ventas ADD CONSTRAINT fk_ventas_productos 
+FOREIGN KEY (product_id) REFERENCES dbo.Productos(product_id);
+
 
 /* Relacion entre Ventas[Postal Code] y Geografia[Postal Code]*/
-ALTER TABLE dbo.Ventas
-ADD CONSTRAINT FK_Ventas_Geografia 
-FOREIGN KEY ([Postal Code]) REFERENCES dbo.Geografia(Postal_Code);
+
+ALTER TABLE dbo.Ventas ADD CONSTRAINT fk_ventas_geografia 
+FOREIGN KEY (postal_code) REFERENCES dbo.Geografia(postal_code);
+
 
 /* Relacion entre Ventas[Order Date] y Geografia[Order_date]*/
-ALTER TABLE dbo.Ventas
-ADD CONSTRAINT FK_Ventas_Tiempo 
-FOREIGN KEY ([Order Date]) REFERENCES dbo.Tiempo(Order_Date);
+
+ALTER TABLE dbo.Ventas ADD CONSTRAINT fk_ventas_tiempo 
+FOREIGN KEY (order_date) REFERENCES dbo.Tiempo(order_date);
+
 
 
 
