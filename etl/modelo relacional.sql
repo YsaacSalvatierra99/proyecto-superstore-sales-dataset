@@ -1,38 +1,21 @@
-/* Tabla Ventas con Tabla Clientes*/
 
-ALTER TABLE Ventas
+/* Relacion entre Ventas[Customer ID] y Clientes[CustomerID] */
+ALTER TABLE dbo.Ventas
 ADD CONSTRAINT FK_Ventas_Clientes
-FOREIGN KEY ([Customer ID])
-REFERENCES Clientes(CustomerID);
+FOREIGN KEY ([Customer ID]) REFERENCES dbo.Clientes(CustomerID);
 
-
-/* Tabla Ventas con Tabla Productos*/
-
-ALTER TABLE Ventas
+/* Relacion entre Ventas[Product ID] y Productos[ProductID] */
+ALTER TABLE dbo.Ventas
 ADD CONSTRAINT FK_Ventas_Productos
-FOREIGN KEY ([Product ID])
-REFERENCES Productos(ProductID);
+FOREIGN KEY ([Product ID]) REFERENCES dbo.Productos(ProductID);
 
+/* Relacion entre Ventas[Postal Code] y Geografia[Postal Code]*/
+ALTER TABLE dbo.Ventas
+ADD CONSTRAINT FK_Ventas_Geografia 
+FOREIGN KEY ([Postal Code]) REFERENCES dbo.Geografia(Postal_Code);
 
-/* Tabla DatosTrainRaw con Tabla Clientes*/
+/* Relacion entre Ventas[Order Date] y Geografia[Order_date]*/
+ALTER TABLE dbo.Ventas
+ADD CONSTRAINT FK_Ventas_Tiempo 
+FOREIGN KEY ([Order Date]) REFERENCES dbo.Tiempo(Order_Date);
 
-ALTER TABLE DatosTrainRaw
-ADD CONSTRAINT FK_DatosTrainRaw_Clientes
-FOREIGN KEY ([Customer ID])
-REFERENCES Clientes(CustomerID);
-
-
-/* Tabla DatosTrainRaw con Tabla Ventas*/
-
-ALTER TABLE DatosTrainRaw
-ADD CONSTRAINT FK_DatosTrainRaw_OrderID
-FOREIGN KEY ([Order ID])
-REFERENCES Ventas([Order ID]);
-
-
-/* Tabla DatosTrainRaw con Tabla Productos*/
-
-ALTER TABLE DatosTrainRaw
-ADD CONSTRAINT FK_DatosTrainRaw_Productos
-FOREIGN KEY ([Product ID])
-REFERENCES Productos(ProductID);
