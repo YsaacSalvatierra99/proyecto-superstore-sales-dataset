@@ -26,10 +26,6 @@ FOREIGN KEY (order_date) REFERENCES dbo.Tiempo(order_date);
 
 
 
-
-
-
-
 /* Me parecia mucho codigo y poco practico si fuesen mas columnas, pero no sabia como resolverlo. 
    Le pregunté a chatgpt pero me daba version con If que aun no manejo y no sabria explicar bien, por ahora usare este metodo.
 */
