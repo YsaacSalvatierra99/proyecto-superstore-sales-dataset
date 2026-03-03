@@ -1,1 +1,5 @@
-
+--Ventas por Año - Mes.
+--Ventas por Región.
+--Ventas por Categoría.
+--Ventas por Segmento.
+--DelyveryTime promedio.
