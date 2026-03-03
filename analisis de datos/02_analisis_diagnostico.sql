@@ -1,1 +1,4 @@
-
+-- Crecimiento MoM / QoQ.
+-- Dependencia del cliente top.
+-- Impacto DeliveryTime en ventas.
+-- Productos con baja rotación.
