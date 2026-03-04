@@ -28,7 +28,7 @@ ORDER BY
 	year,
 	month;
 
--- Dependencia del cliente top.
+
 WITH ventas_trimestrales AS (
 	SELECT 
 		T.year,
@@ -53,6 +53,27 @@ FROM ventas_trimestrales
 ORDER BY
 	year,
 	quarter;
+
+-- Dependencia del cliente top.
+WITH ventas_cliente AS (
+    SELECT
+        C.customer_id,
+        C.customer_name,
+        SUM(V.sales) AS total_sales_cliente
+    FROM Ventas V
+    JOIN Clientes C
+        ON V.customer_id = C.customer_id
+    GROUP BY
+        C.customer_id,
+        C.customer_name
+)
+
+SELECT TOP 5
+    customer_name,
+    total_sales_cliente,
+    (total_sales_cliente * 100.0 / (SELECT SUM(sales) FROM Ventas)) AS porcentaje_del_total
+FROM ventas_cliente
+ORDER BY total_sales_cliente DESC;
 
 -- Impacto DeliveryTime en ventas.
 -- Productos con baja rotación.
