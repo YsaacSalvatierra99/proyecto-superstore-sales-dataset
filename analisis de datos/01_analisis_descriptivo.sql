@@ -36,32 +36,28 @@ ORDER BY
 	total_orders;
 
 --Ventas por Segmento.
-SELECT 
-    c.segment,
-    SUM(o.sales) AS total_sales,
-    COUNT(DISTINCT o.order_id) AS total_orders,
-    AVG(o.sales) AS avg_ticket
-FROM orders o
-JOIN customers c 
-    ON o.customer_id = c.customer_id
+SELECT
+	C.segment,
+	SUM(V.sales) AS total_sales,
+	COUNT(DISTINCT V.order_id) AS total_orders,
+	AVG(V.sales) AS avg_ticket
+FROM Clientes C
+JOIN Ventas V
+	ON C.customer_id = V.customer_id
 GROUP BY 
-    c.segment
+	C.segment
+ORDER BY
+	total_sales DESC;
+--EXPLICAR MEJOR LA INFORMACION MOSTRADA EN EL SELECT Y POR QUE
+
+--DelyveryTime promedio por Region
+SELECT 
+	G.region,
+	AVG(DATEDIFF(DAY,V.order_date,V.ship_date)) AS avg_delivery_time
+FROM Ventas V
+JOIN Geografia G
+	ON V.postal_code = G.postal_code
+GROUP BY 
+	G.region
 ORDER BY 
-    total_sales DESC;
-
---DelyveryTime promedio.
-SELECT 
-    AVG(DATEDIFF(DAY, o.order_date, o.ship_date)) AS avg_delivery_days
-FROM orders o;
-
-
-
-
-SELECT 
-    g.region,
-    AVG(DATEDIFF(DAY, o.order_date, o.ship_date)) AS avg_delivery_days
-FROM orders o
-JOIN geography g 
-    ON o.postal_code = g.postal_code
-GROUP BY 
-    g.region;
+	avg_delivery_time DESC;
