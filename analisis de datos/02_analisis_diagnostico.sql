@@ -76,4 +76,39 @@ FROM ventas_cliente
 ORDER BY total_sales_cliente DESC;
 
 -- Impacto DeliveryTime en ventas.
+SELECT 
+	CASE 
+    	WHEN DATEDIFF(day,order_date,ship_date) 
+        <= 3 THEN '0-3 dias'
+        WHEN DATEDIFF(day, order_date, ship_date)
+        <= 6 THEN '4-6 dias'
+        ELSE '7+ dias'
+    END AS rango_entrega,
+    COUNT(*) AS total_pedidos,
+    AVG(sales) AS ticket_promedio,
+    SUM(sales) AS total_sales
+ FROM ventas
+ GROUP BY 
+ 	CASE 
+    	WHEN datediff(day,order_date,ship_date) <= 3 THEN '0-3 dias'
+        WHEN datediff(day,order_date,ship_date) <= 6 THEN '4-6 dias'
+        ELSE '7+ dias'
+    END
+ ORDER BY total_sales DESC;
+
 -- Productos con baja rotación.
+SELECT 
+	P.product_id,
+	P.product_name,
+	P.category,
+	COUNT(V.order_id) AS veces_vendido,
+	SUM(V.sales) AS total_sales
+FROM Productos P
+LEFT JOIN Ventas V
+	ON P.product_id = V.product_id
+GROUP BY
+	P.product_id,
+	P.product_name,
+	P.category
+HAVING COUNT(V.order_id) < 5
+ORDER BY veces_vendido;
