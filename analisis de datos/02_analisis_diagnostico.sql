@@ -1,4 +1,4 @@
--- Crecimiento MoM / QoQ.
+-- Crecimiento MoM.
 SELECT * FROM Ventas;
 SELECT * FROM Tiempo;
 
