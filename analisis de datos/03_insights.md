@@ -1,9 +1,22 @@
-1) ALTA VOLATILIDAD EN LAS VENTAS MENSUALES.
+# Insights obtenidos del análisis
+
+## Principales insights
+
+1. Volatilidad y estacionalidad en ventas mensuales  
+2. Patrones de crecimiento por trimestre (Quarter)  
+3. Baja concentración de ventas en clientes individuales  
+4. Tiempo de entrega estándar y su impacto en ventas  
+5. Catálogo desactualizado y productos con baja rotación
+
+
+
+
+1) VOLATILIDAD Y ESTACIONALIDAD EN VENTAS MENSUALES.
 
 Las ventas presentan una fuerte volatilidad mes a mes, con crecimientos superiores al 100% en varios períodos y caídas significativas en otros.
 Esto sugiere la presencia de estacionalidad o campañas comerciales puntuales que generan picos de ventas.
 
-Grandes subidas:
+###Grandes subidas:
 
 2015-03 → +1299%
 
@@ -13,7 +26,7 @@ Grandes subidas:
 
 2018-03 → +108%
 
-Grandes Caidas:
+###Grandes Caidas:
 
 2016-01 → −91%
 
@@ -81,13 +94,13 @@ lo que indica que el negocio no depende significativamente de un pequeño grupo 
 | 7+ días       | 303           | 53,307          | 16,152,308  |
 
 La mayoría de las ventas se realizan con un tiempo de espera de 4 a 6 dias, 
-por lo tanto este seria el estandar del tiempo logistico de la empresa
+lo que sugiere que este rango representa el tiempo logístico estándar de la empresa,
 que concentra la mayor parte de la demanda.
 
 Cabe destacar que los pedidos con envío rápido (0-3 días) presentan el ticket promedio más alto,
 lo que indica que los clientes que necesitan entregas urgentes tienden a realizar compras de mayor valor.
 
-4) CATALOGO DESACTUALIZADO Y PRODUCTOS CON BAJA ROTACION.
+5) CATALOGO DESACTUALIZADO Y PRODUCTOS CON BAJA ROTACION.
 
 Se encontrarion múltiples productos en el catálogo que no registraron ventas durante el período analizado,
 lo que sugiere optimizar el portafolio eliminando o reemplazando productos sin demanda.
@@ -99,3 +112,16 @@ Tomar en cuenta que no todos los productos de baja rotacion son una señal negat
 algunos pueden ser productos unitarios de alto valor, lo cual es normal.
 
 Revisar la lista de productos sin, o con poca, rotacion para verificar los casos.
+
+
+
+
+## Conclusión
+
+El análisis permite identificar patrones claros en el comportamiento de las ventas:
+
+- Existe una fuerte estacionalidad con caídas consistentes en enero.
+- El crecimiento se recupera durante el segundo trimestre.
+- Las ventas no dependen de un pequeño grupo de clientes, lo que reduce el riesgo de concentración.
+- El tiempo logístico estándar del negocio se sitúa entre 4 y 6 días.
+- Se identificaron productos con baja o nula rotación que podrían indicar oportunidades de optimización del catálogo.
