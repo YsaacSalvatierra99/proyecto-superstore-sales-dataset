@@ -25,7 +25,10 @@ Se observa una caída consistente en las ventas durante enero en todos los años
 Esto podría deberse a estacionalidad posterior a las campañas de fin de año, donde la demanda disminuye significativamente.
 
 
+
+
 2) PATRONES DE QUARTER DESTACABLES.
+
 
 El Q1 es el de mayor caida en todos los años.
 
@@ -51,7 +54,11 @@ Año	    Q4
 2017	+43%
 2018	+74%
 
+
+
+
 3) BAJA CONCENTRACION DE VENTAS EN CLIENTES INDIVIDUALES.
+
 
 La distribución de ventas entre clientes muestra una estructura descentralizada,
 lo que indica que el negocio no depende significativamente de un pequeño grupo de compradores.
