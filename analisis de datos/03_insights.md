@@ -65,3 +65,17 @@ lo que indica que el negocio no depende significativamente de un pequeño grupo 
 | Eugene Hildebrand | 1,879,604 | **0.59%**   |
 | Carlos Soltero    | 1,865,723 | **0.59%**   |
 
+4)TIEMPO DE DEMORA ESTANDARD Y SUS VENTAS.
+
+| rango_entrega | total_pedidos | ticket_promedio | total_sales |
+| ------------- | ------------- | --------------- | ----------- |
+| 4–6 días      | 3033          | 63,521          | 192,598,137 |
+| 0–3 días      | 1586          | 66,222          | 105,028,360 |
+| 7+ días       | 303           | 53,307          | 16,152,308  |
+
+La mayoría de las ventas se realizan con un tiempo de espera de 4 a 6 dias, 
+por lo tanto este seria el estandar del tiempo logistico de la empresa
+que concentra la mayor parte de la demanda.
+
+Cabe destacar que los pedidos con envío rápido (0-3 días) presentan el ticket promedio más alto,
+lo que indica que los clientes que necesitan entregas urgentes tienden a realizar compras de mayor valor.
