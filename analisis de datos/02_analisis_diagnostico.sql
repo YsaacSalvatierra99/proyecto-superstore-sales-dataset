@@ -29,6 +29,8 @@ ORDER BY
 	month;
 
 
+-- Crecimiento QoQ.
+
 WITH ventas_trimestrales AS (
 	SELECT 
 		T.year,
