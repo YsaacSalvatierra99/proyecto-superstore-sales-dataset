@@ -86,3 +86,16 @@ que concentra la mayor parte de la demanda.
 
 Cabe destacar que los pedidos con envío rápido (0-3 días) presentan el ticket promedio más alto,
 lo que indica que los clientes que necesitan entregas urgentes tienden a realizar compras de mayor valor.
+
+4) CATALOGO DESACTUALIZADO Y PRODUCTOS CON BAJA ROTACION.
+
+Se encontrarion múltiples productos en el catálogo que no registraron ventas durante el período analizado,
+lo que sugiere optimizar el portafolio eliminando o reemplazando productos sin demanda.
+
+La categoría Furniture presenta varios productos sin ventas o con muy baja rotación,
+lo que podría indicar una menor demanda relativa frente a otras categorías del catálogo.
+
+Tomar en cuenta que no todos los productos de baja rotacion son una señal negativa,
+algunos pueden ser productos unitarios de alto valor, lo cual es normal.
+
+Revisar la lista de productos sin, o con poca, rotacion para verificar los casos.
