@@ -1,3 +1,35 @@
+--EDA basico.
+
+--Cuantas transacciones unicas hay registradas.
+SELECT COUNT(*) FROM ventas;
+
+-- Cuantos clientes unicos hay registrados.
+SELECT COUNT(*) FROM clientes;
+
+-- Cuantos productos unicos hay registrados.
+SELECT COUNT(*) FROM productos;
+
+-- Rango de fechas que abarca la base de datos a analizar.
+SELECT MIN(order_date), MAX(order_date)
+FROM ventas;
+
+-- Ventas totales (Dentro del rango de fecha del BBDD).
+SELECT SUM(sales) total_sales
+FROM ventas;
+
+
+-- Ventas por categoria.
+SELECT 
+    P.category,
+    SUM(V.sales) AS total_sales
+FROM ventas V
+JOIN productos P
+ON V.product_id = P.product_id
+GROUP BY P.category
+ORDER BY total_sales DESC;
+
+
+
 --Ventas por Año - Mes.
 SELECT T.year, T.month, SUM(V.sales) AS total_sales
 FROM Ventas V
