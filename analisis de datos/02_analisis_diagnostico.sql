@@ -79,6 +79,89 @@ INNER JOIN dbo.Productos P ON V.product_id = P.product_id
 GROUP BY P.category, P.product_name
 ORDER BY total_ventas DESC;
 
+-- Ventas de segment por categoria.
+SELECT 
+    C.segment, 
+    P.category, 
+    SUM(V.sales) AS total_ventas
+FROM dbo.Ventas V
+JOIN dbo.Clientes C ON V.customer_id = C.customer_id
+JOIN dbo.Productos P ON V.product_id = P.product_id
+GROUP BY C.segment, P.category
+ORDER BY C.segment, total_ventas DESC;
+
+-- segment con mayor revenue (ingreso bruto)
+SELECT TOP 1 
+    C.segment, 
+    SUM(V.sales) AS revenue_total
+FROM dbo.Ventas V
+JOIN dbo.Clientes C ON V.customer_id = C.customer_id
+GROUP BY C.segment
+ORDER BY revenue_total DESC;
+
+-- En que mes se venden mas productos por categoria?
+WITH VentasMensuales AS (
+    SELECT 
+        P.category, 
+        T.month_name, 
+        SUM(V.sales) AS total_ventas,
+        RANK() OVER (PARTITION BY P.category ORDER BY SUM(V.sales) DESC) as ranking
+    FROM dbo.Ventas V
+    JOIN dbo.Productos P ON V.product_id = P.product_id
+    JOIN dbo.Tiempo T ON V.order_date = T.order_date
+    GROUP BY P.category, T.month_name
+)
+SELECT category, month_name, total_ventas
+FROM VentasMensuales
+WHERE ranking = 1;
+
+-- En que trimestre se venden mas productos por categoria?
+WITH VentasTrimestrales AS (
+    SELECT 
+        P.category, 
+        T.quarter, 
+        SUM(V.sales) AS total_ventas,
+        RANK() OVER (PARTITION BY P.category ORDER BY SUM(V.sales) DESC) as ranking
+    FROM dbo.Ventas V
+    JOIN dbo.Productos P ON V.product_id = P.product_id
+    JOIN dbo.Tiempo T ON V.order_date = T.order_date
+    GROUP BY P.category, T.quarter
+)
+SELECT category, quarter, total_ventas
+FROM VentasTrimestrales
+WHERE ranking = 1;
+
+-- Dependencia del cliente top.
+WITH ventas_cliente AS (
+    SELECT
+        C.customer_id,
+        C.customer_name,
+        SUM(V.sales) AS total_sales_cliente
+    FROM Ventas V
+    JOIN Clientes C
+        ON V.customer_id = C.customer_id
+    GROUP BY
+        C.customer_id,
+        C.customer_name
+)
+
+SELECT TOP 5
+    customer_name,
+    total_sales_cliente,
+    (total_sales_cliente * 100.0 / (SELECT SUM(sales) FROM Ventas)) AS porcentaje_del_total
+FROM ventas_cliente
+ORDER BY total_sales_cliente DESC;
+
+-- (Como no hay centralizacion, no es relevante el cuantas compras o el revenue del top 10).
+
+
+
+
+
+
+----------------------------------------------------------------------
+
+
 ----------------------------------------------------------------------
 -- Ventas mensuales por categoria.
 SELECT 
@@ -189,26 +272,6 @@ ORDER BY
 	year,
 	quarter;
 
--- Dependencia del cliente top.
-WITH ventas_cliente AS (
-    SELECT
-        C.customer_id,
-        C.customer_name,
-        SUM(V.sales) AS total_sales_cliente
-    FROM Ventas V
-    JOIN Clientes C
-        ON V.customer_id = C.customer_id
-    GROUP BY
-        C.customer_id,
-        C.customer_name
-)
-
-SELECT TOP 5
-    customer_name,
-    total_sales_cliente,
-    (total_sales_cliente * 100.0 / (SELECT SUM(sales) FROM Ventas)) AS porcentaje_del_total
-FROM ventas_cliente
-ORDER BY total_sales_cliente DESC;
 
 -- Impacto DeliveryTime en ventas.
 SELECT 
