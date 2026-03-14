@@ -17,6 +17,23 @@ FROM ventas;
 SELECT SUM(sales) total_sales
 FROM ventas;
 
+-- Ventas por mes.
+SELECT * FROM ventas
+
+--Ventas por Año - Mes.
+SELECT T.year, T.month, SUM(V.sales) AS total_sales
+FROM Ventas V
+JOIN Tiempo T
+	ON V.order_date = T.order_date
+GROUP BY 
+	T.month,
+	T.year
+ORDER BY
+	T.year,
+	T.month;
+
+
+
 
 -- Ventas por categoria.
 SELECT 
@@ -30,17 +47,7 @@ ORDER BY total_sales DESC;
 
 
 
---Ventas por Año - Mes.
-SELECT T.year, T.month, SUM(V.sales) AS total_sales
-FROM Ventas V
-JOIN Tiempo T
-	ON V.order_date = T.order_date
-GROUP BY 
-	T.month,
-	T.year
-ORDER BY
-	T.year,
-	T.month;
+
 
 --Ventas por Región.
 SELECT G.region,
