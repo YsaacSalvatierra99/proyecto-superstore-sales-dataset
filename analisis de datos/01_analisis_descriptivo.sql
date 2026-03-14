@@ -32,9 +32,6 @@ ORDER BY
 	T.year,
 	T.month;
 
-
-
-
 -- Ventas por categoria.
 SELECT 
     P.category,
@@ -44,10 +41,6 @@ JOIN productos P
 ON V.product_id = P.product_id
 GROUP BY P.category
 ORDER BY total_sales DESC;
-
-
-
-
 
 --Ventas por Región.
 SELECT G.region,
@@ -87,16 +80,3 @@ GROUP BY
 	C.segment
 ORDER BY
 	total_sales DESC;
---EXPLICAR MEJOR LA INFORMACION MOSTRADA EN EL SELECT Y POR QUE
-
---DelyveryTime promedio por Region
-SELECT 
-	G.region,
-	AVG(DATEDIFF(DAY,V.order_date,V.ship_date)) AS avg_delivery_time
-FROM Ventas V
-JOIN Geografia G
-	ON V.postal_code = G.postal_code
-GROUP BY 
-	G.region
-ORDER BY 
-	avg_delivery_time DESC;
