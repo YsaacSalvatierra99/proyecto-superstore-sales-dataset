@@ -70,14 +70,26 @@ GROUP BY P.product_name
 ORDER BY total_ventas DESC;
 
 -- Top 10 productos mas vendidos por categoria.
-SELECT TOP 10 
+WITH ranking_productos AS (
+SELECT
     P.category,
-    P.product_name, 
-    SUM(V.sales) AS total_ventas
+    P.product_name,
+    SUM(V.sales) AS total_sales,
+    ROW_NUMBER() OVER(
+        PARTITION BY P.category
+        ORDER BY SUM(V.sales) DESC
+    ) AS ranking
 FROM dbo.Ventas V
-INNER JOIN dbo.Productos P ON V.product_id = P.product_id
-GROUP BY P.category, P.product_name
-ORDER BY total_ventas DESC;
+JOIN dbo.Productos P
+    ON V.product_id = P.product_id
+GROUP BY
+    P.category,
+    P.product_name
+)
+
+SELECT *
+FROM ranking_productos
+WHERE ranking <= 10;
 
 -- Ventas de segment por categoria.
 SELECT 
