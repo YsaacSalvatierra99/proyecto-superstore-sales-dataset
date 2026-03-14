@@ -17,20 +17,31 @@ FROM ventas;
 SELECT SUM(sales) total_sales
 FROM ventas;
 
--- Ventas por mes.
-SELECT * FROM ventas
+-- Ventas por mes
+SELECT 
+    T.month_name, 
+    SUM(V.sales) AS total_ventas
+FROM dbo.Ventas V
+INNER JOIN dbo.Tiempo T ON V.order_date = T.order_date
+GROUP BY T.month_name
+ORDER BY MIN(V.order_date);
 
---Ventas por Año - Mes.
-SELECT T.year, T.month, SUM(V.sales) AS total_sales
-FROM Ventas V
-JOIN Tiempo T
-	ON V.order_date = T.order_date
-GROUP BY 
-	T.month,
-	T.year
-ORDER BY
-	T.year,
-	T.month;
+-- Ventas por trimestre
+SELECT 
+    T.quarter, 
+    SUM(V.sales) AS total_ventas
+FROM dbo.Ventas V
+INNER JOIN dbo.Tiempo T ON V.order_date = T.order_date
+GROUP BY T.quarter;
+
+-- Ventas por año
+SELECT 
+    T.year, 
+    SUM(V.sales) AS total_ventas
+FROM dbo.Ventas V
+INNER JOIN dbo.Tiempo T ON V.order_date = T.order_date
+GROUP BY T.year
+ORDER BY T.year;
 
 -- Ventas por categoria.
 SELECT 
@@ -42,30 +53,32 @@ ON V.product_id = P.product_id
 GROUP BY P.category
 ORDER BY total_sales DESC;
 
---Ventas por Región.
-SELECT G.region,
-	SUM(V.sales) AS total_sales,
-	COUNT(DISTINCT V.order_id) AS total_orders
-FROM Geografia G
-JOIN Ventas V
-	ON G.postal_code = V.postal_code
-GROUP BY 
-	G.region
-ORDER BY
-	total_sales DESC;
-
 --Ventas por Categoría.
 SELECT 
-	P.category,
-	SUM(V.sales) AS total_sales,
-	COUNT(DISTINCT V.order_id) AS total_orders
-FROM Ventas V
-JOIN Productos P
-	ON P.product_id = V.product_id
-GROUP BY 
-	P.category
-ORDER BY
-	total_orders;
+    P.category, 
+    SUM(V.sales) AS total_ventas
+FROM dbo.Ventas V
+INNER JOIN dbo.Productos P ON V.product_id = P.product_id
+GROUP BY P.category
+ORDER BY total_ventas DESC;
+
+-- Ventas por subcategoria.
+SELECT 
+    P.sub_category, 
+    SUM(V.sales) AS total_ventas
+FROM dbo.Ventas V
+INNER JOIN dbo.Productos P ON V.product_id = P.product_id
+GROUP BY P.sub_category
+ORDER BY total_ventas DESC;
+
+-- Ventas por producto.
+SELECT 
+    P.product_name, 
+    SUM(V.sales) AS total_ventas
+FROM dbo.Ventas V
+INNER JOIN dbo.Productos P ON V.product_id = P.product_id
+GROUP BY P.product_name
+ORDER BY total_ventas DESC;
 
 --Ventas por Segmento.
 SELECT
