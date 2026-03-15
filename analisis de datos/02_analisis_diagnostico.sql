@@ -1,7 +1,10 @@
+
+                --PERFORMANCE GENERAL--
+
 -- Que meses venden mas?
 SELECT TOP 5 
     T.month_name, 
-    SUM(V.sales) AS total_ventas
+    SUM(V.sales) AS total_ventas  
 FROM dbo.Ventas V
 INNER JOIN dbo.Tiempo T ON V.order_date = T.order_date
 GROUP BY T.month_name
@@ -15,6 +18,23 @@ FROM dbo.Ventas V
 INNER JOIN dbo.Tiempo T ON V.order_date = T.order_date
 GROUP BY T.quarter
 ORDER BY total_ingresos DESC;
+
+-- Ventas por region y categoria.
+SELECT 
+    G.region AS Region,
+    P.category AS Categoria,
+    SUM(V.sales) AS Total_Ventas,
+    COUNT(V.order_id) AS Cantidad_Pedidos
+FROM dbo.Ventas V
+JOIN dbo.Geografia G ON V.postal_code = G.postal_code
+JOIN dbo.Productos P ON V.product_id = P.product_id
+GROUP BY G.region, P.category
+ORDER BY G.region, Total_Ventas DESC;
+
+
+
+
+                --PERFORMANCE GEOGRAFICO--
 
 -- Regiones con mayores ventas por categoria.
 SELECT TOP 5 
@@ -35,7 +55,12 @@ JOIN dbo.Productos P ON V.product_id = P.product_id
 JOIN dbo.Geografia G ON V.postal_code = G.postal_code
 GROUP BY G.region, P.category
 ORDER BY total_ventas DESC;
------------------------------------------------------------------------------
+
+
+
+
+                --PERFORMANCE de PRODUCTOS--
+
 -- Top 10 productos mas vendidos por categoria.
 WITH ranking_productos AS (
 SELECT
@@ -57,26 +82,6 @@ GROUP BY
 SELECT *
 FROM ranking_productos
 WHERE ranking <= 10;
-
--- Ventas de segment por categoria.
-SELECT 
-    C.segment, 
-    P.category, 
-    SUM(V.sales) AS total_ventas
-FROM dbo.Ventas V
-JOIN dbo.Clientes C ON V.customer_id = C.customer_id
-JOIN dbo.Productos P ON V.product_id = P.product_id
-GROUP BY C.segment, P.category
-ORDER BY C.segment, total_ventas DESC;
-
--- segment con mayor revenue (ingreso bruto)
-SELECT TOP 1 
-    C.segment, 
-    SUM(V.sales) AS revenue_total
-FROM dbo.Ventas V
-JOIN dbo.Clientes C ON V.customer_id = C.customer_id
-GROUP BY C.segment
-ORDER BY revenue_total DESC;
 
 -- En qué mes se venden mas productos por categoria?
 WITH VentasMensuales AS (
@@ -109,6 +114,36 @@ WITH VentasTrimestrales AS (
 SELECT category, quarter, total_ventas
 FROM VentasTrimestrales
 WHERE ranking = 1;
+
+
+
+
+                --PERFORMANCE de CLIENTE--
+
+-- Ventas de segment por categoria.
+SELECT 
+    C.segment, 
+    P.category, 
+    SUM(V.sales) AS total_ventas
+FROM dbo.Ventas V
+JOIN dbo.Clientes C ON V.customer_id = C.customer_id
+JOIN dbo.Productos P ON V.product_id = P.product_id
+GROUP BY C.segment, P.category
+ORDER BY C.segment, total_ventas DESC;
+
+-- segment con mayor revenue (ingreso bruto)
+SELECT TOP 1 
+    C.segment, 
+    SUM(V.sales) AS revenue_total
+FROM dbo.Ventas V
+JOIN dbo.Clientes C ON V.customer_id = C.customer_id
+GROUP BY C.segment
+ORDER BY revenue_total DESC;
+
+
+
+
+                --RIESGO DE DEPENDENCIA DE CLIENTES--
 
 -- Dependencia del cliente top.
 WITH ventas_cliente AS (
