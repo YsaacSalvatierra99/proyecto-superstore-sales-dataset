@@ -1,6 +1,7 @@
 
                 --PERFORMANCE GENERAL--
 
+
 -- Que meses venden mas?
 SELECT TOP 5 
     T.month_name, 
@@ -36,6 +37,7 @@ ORDER BY G.region, Total_Ventas DESC;
 
                 --PERFORMANCE GEOGRAFICO--
 
+
 -- Regiones con mayores ventas por categoria.
 SELECT TOP 5 
     G.state, 
@@ -60,6 +62,7 @@ ORDER BY total_ventas DESC;
 
 
                 --PERFORMANCE de PRODUCTOS--
+
 
 -- Top 10 productos mas vendidos por categoria.
 WITH ranking_productos AS (
@@ -120,6 +123,7 @@ WHERE ranking = 1;
 
                 --PERFORMANCE de CLIENTE--
 
+
 -- Ventas de segment por categoria.
 SELECT 
     C.segment, 
@@ -145,6 +149,7 @@ ORDER BY revenue_total DESC;
 
                 --RIESGO DE DEPENDENCIA DE CLIENTES--
 
+
 -- Dependencia del cliente top.
 WITH ventas_cliente AS (
     SELECT
@@ -168,5 +173,10 @@ SELECT TOP 5
 FROM ventas_cliente
 ORDER BY total_sales_cliente DESC;
 -- (Como no hay centralizacion, no es relevante el cuantas compras o el revenue del top 10).
+
+
+
+
+
 
 
