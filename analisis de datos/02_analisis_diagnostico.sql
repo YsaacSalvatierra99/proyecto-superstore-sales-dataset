@@ -15,6 +15,26 @@ FROM dbo.Ventas V
 INNER JOIN dbo.Tiempo T ON V.order_date = T.order_date
 GROUP BY T.quarter
 ORDER BY total_ingresos DESC;
+
+-- Regiones con mayores ventas por categoria.
+SELECT TOP 5 
+    G.state, 
+    G.region, 
+    SUM(V.sales) AS total_sales
+FROM dbo.Ventas V
+JOIN dbo.Geografia G ON V.postal_code = G.postal_code
+GROUP BY G.state, G.region
+ORDER BY total_sales DESC;
+
+SELECT 
+    G.region, 
+    P.category, 
+    SUM(V.sales) AS total_ventas
+FROM dbo.Ventas V
+JOIN dbo.Productos P ON V.product_id = P.product_id
+JOIN dbo.Geografia G ON V.postal_code = G.postal_code
+GROUP BY G.region, P.category
+ORDER BY total_ventas DESC;
 -----------------------------------------------------------------------------
 -- Top 10 productos mas vendidos por categoria.
 WITH ranking_productos AS (
@@ -95,9 +115,10 @@ WITH ventas_cliente AS (
     SELECT
         C.customer_id,
         C.customer_name,
-        SUM(V.sales) AS total_sales_cliente
-    FROM Ventas V
-    JOIN Clientes C
+        SUM(V.sales) AS total_sales_cliente,
+        COUNT(V.order_id) AS veces_vendido 
+    FROM dbo.Ventas V
+    JOIN dbo.Clientes C
         ON V.customer_id = C.customer_id
     GROUP BY
         C.customer_id,
@@ -107,11 +128,10 @@ WITH ventas_cliente AS (
 SELECT TOP 5
     customer_name,
     total_sales_cliente,
-    (total_sales_cliente * 100.0 / (SELECT SUM(sales) FROM Ventas)) AS porcentaje_del_total
+    veces_vendido,
+    (total_sales_cliente * 100.0 / (SELECT SUM(sales) FROM dbo.Ventas)) AS porcentaje_del_total
 FROM ventas_cliente
 ORDER BY total_sales_cliente DESC;
-
 -- (Como no hay centralizacion, no es relevante el cuantas compras o el revenue del top 10).
 
 
-ORDER BY veces_vendido;
