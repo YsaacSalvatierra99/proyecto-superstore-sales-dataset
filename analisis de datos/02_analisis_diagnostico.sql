@@ -1,29 +1,3 @@
--- Ventas por mes
-SELECT 
-    T.month_name, 
-    SUM(V.sales) AS total_ventas
-FROM dbo.Ventas V
-INNER JOIN dbo.Tiempo T ON V.order_date = T.order_date
-GROUP BY T.month_name
-ORDER BY MIN(V.order_date);
-
--- Ventas por trimestre
-SELECT 
-    T.quarter, 
-    SUM(V.sales) AS total_ventas
-FROM dbo.Ventas V
-INNER JOIN dbo.Tiempo T ON V.order_date = T.order_date
-GROUP BY T.quarter;
-
--- Ventas por año
-SELECT 
-    T.year, 
-    SUM(V.sales) AS total_ventas
-FROM dbo.Ventas V
-INNER JOIN dbo.Tiempo T ON V.order_date = T.order_date
-GROUP BY T.year
-ORDER BY T.year;
-
 -- Que meses venden mas?
 SELECT TOP 5 
     T.month_name, 
@@ -42,33 +16,6 @@ INNER JOIN dbo.Tiempo T ON V.order_date = T.order_date
 GROUP BY T.quarter
 ORDER BY total_ingresos DESC;
 -----------------------------------------------------------------------------
--- Ventas por categoria.
-SELECT 
-    P.category, 
-    SUM(V.sales) AS total_ventas
-FROM dbo.Ventas V
-INNER JOIN dbo.Productos P ON V.product_id = P.product_id
-GROUP BY P.category
-ORDER BY total_ventas DESC;
-
--- Ventas por subcategoria.
-SELECT 
-    P.sub_category, 
-    SUM(V.sales) AS total_ventas
-FROM dbo.Ventas V
-INNER JOIN dbo.Productos P ON V.product_id = P.product_id
-GROUP BY P.sub_category
-ORDER BY total_ventas DESC;
-
--- Ventas por producto.
-SELECT 
-    P.product_name, 
-    SUM(V.sales) AS total_ventas
-FROM dbo.Ventas V
-INNER JOIN dbo.Productos P ON V.product_id = P.product_id
-GROUP BY P.product_name
-ORDER BY total_ventas DESC;
-
 -- Top 10 productos mas vendidos por categoria.
 WITH ranking_productos AS (
 SELECT
@@ -111,7 +58,7 @@ JOIN dbo.Clientes C ON V.customer_id = C.customer_id
 GROUP BY C.segment
 ORDER BY revenue_total DESC;
 
--- En que mes se venden mas productos por categoria?
+-- En qué mes se venden mas productos por categoria?
 WITH VentasMensuales AS (
     SELECT 
         P.category, 
