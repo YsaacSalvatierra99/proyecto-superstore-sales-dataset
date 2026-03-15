@@ -43,16 +43,6 @@ INNER JOIN dbo.Tiempo T ON V.order_date = T.order_date
 GROUP BY T.year
 ORDER BY T.year;
 
--- Ventas por categoria.
-SELECT 
-    P.category,
-    SUM(V.sales) AS total_sales
-FROM ventas V
-JOIN productos P
-ON V.product_id = P.product_id
-GROUP BY P.category
-ORDER BY total_sales DESC;
-
 --Ventas por Categoría.
 SELECT 
     P.category, 
