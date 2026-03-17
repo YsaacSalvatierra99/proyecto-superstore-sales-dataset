@@ -38,7 +38,7 @@ ORDER BY G.region, Total_Ventas DESC;
                 --PERFORMANCE GEOGRAFICO--
 
 
--- Regiones con mayores ventas por categoria.
+-- Regiones con mayores ventas por estado.
 SELECT TOP 5 
     G.state, 
     G.region, 
@@ -48,6 +48,7 @@ JOIN dbo.Geografia G ON V.postal_code = G.postal_code
 GROUP BY G.state, G.region
 ORDER BY total_sales DESC;
 
+-- Regiones con mayores ventas por estado y categoria.
 SELECT 
     G.region, 
     P.category, 
