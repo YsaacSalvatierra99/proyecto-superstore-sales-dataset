@@ -37,28 +37,33 @@ Ajustar estrategias comerciales según región.
 
 **Hallazgo:**
 
-* Office Supplies → alta cantidad de pedidos
+* **Chairs** y **Phones** son las subcategorías con mayores ingresos
+* Office Supplies → alto volumen
 * Furniture → mayor ticket promedio
 
 **Insight:**
-El negocio combina volumen y valor por venta.
+El crecimiento se apoya en productos específicos dentro de cada categoría.
 
 **Acción:**
-Optimizar cross-selling entre categorías.
+Potenciar top sellers y aplicar cross-selling entre categorías.
 
 ---
 
 ## 👥 Clientes
 
 **Hallazgo:**
-El segmento **Consumer** representa el 68% de los ingresos.
-No hay alta dependencia de clientes individuales.
+
+* **Consumer** representa el 68% de los ingresos
+* Corporate tiene el **ticket promedio más alto**
+* No hay alta dependencia de clientes individuales
 
 **Insight:**
-Base de clientes diversificada y estable.
+Base de clientes diversificada con oportunidades de monetización en segmentos premium.
 
 **Acción:**
-Fomentar fidelización y estrategias de upselling.
+
+* Fidelizar Consumer
+* Aumentar foco en Corporate (mayor ticket)
 
 ---
 
@@ -68,6 +73,7 @@ El crecimiento del negocio depende de:
 
 * Reducir la dependencia del Q4
 * Adaptar estrategias por región
-* Optimizar el balance entre volumen y ticket promedio
+* Potenciar productos clave (Chairs, Phones)
+* Aprovechar segmentos de alto valor
 
-👉 Principal oportunidad: **distribuir mejor las ventas a lo largo del año**.
+👉 Principal oportunidad: **optimizar el mix de productos y clientes para maximizar ingresos durante todo el año**.
